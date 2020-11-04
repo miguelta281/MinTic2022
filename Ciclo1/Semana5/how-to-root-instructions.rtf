@@ -1,0 +1,76 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1265\cocoasubrtf190
+{\fonttbl\f0\fswiss\fcharset0 ArialMT;}
+{\colortbl;\red255\green255\blue255;}
+\margl1440\margr1440\vieww13940\viewh9980\viewkind0
+\deftab720
+\pard\pardeftab720
+
+\f0\b\fs28 \cf0 April 15 2014: Instructions to install root on your laptop. If you do not have a laptop see Prof. Spiropulu (L265) or call x2471\
+
+\b0 \
+In preparation for the ROOT tutorial for ph199 on Friday, you should setup the software on your computer beforehand.  Please read these instructions carefully.\
+\
+Make sure you try these instructions before 3PM on Thursday!\
+Especially if you are running Windows.  Some of the steps take a long time and are not straightforward and there is a very good chance that something will fail for you (especially on Windows and OSX).  If you give yourself plenty of time we will be happy to help you with any problems, but showing up to the session on Friday without ROOT working because you didn't start trying to install it until noon on Friday is not an excuse!\
+\
+\
+If you encounter problems:\
+Come by the second floor of Lauritsen any time between 9AM and 7PM Wednesday or Thursday or before 11:30AM on Friday and look in offices: 267, 265, 259, or 251 and someone will be able to help you.  Please make an honest effort to get it working beforehand, but if you get stuck we're happy to help.\
+\
+If you see any problems with these instructions, let me know! (alex.mott at cern dot ch)\
+\
+If you are running Windows:\
+You will need to have a linux installation.  By far the easiest way to do this is to install ubuntu using WUBI:\
+http://www.ubuntu.com/download/desktop/windows-installer\
+(note, this only works if you are running Windows 7 or lower with non-UEFI firmware).  \
+Download this and follow the instructions to setup your ubuntu partition.\
+\
+If you have Windows 8 or UEFI hardware, you will need to install a full ubuntu partition.  You can get ubuntu from: http://www.ubuntu.com/download/desktop/  and there are lots of tutorials online about how to install it, \
+\
+You are now running ubuntu, so skip to the ubuntu instructions.\
+\
+If you are running OSX: \
+\
+If you are not running 10.9: install XQuartz from http://xquartz.macosforge.org/landing/\
+\
+Download one of the following depending on your OSX version:\
+10.9:  ftp://root.cern.ch/root/root_v5.34.18.macosx64-10.9-i386.tar.gz\
+10.6-10.8:  ftp://root.cern.ch/root/root_v5.34.14.macosx106-x86_64-gcc-4.2.tar.gz\
+  \
+unzip the file you downloaded.\
+\
+Then open a terminal and type:  \
+cd Downloads\
+. root/bin/thisroot.sh\
+(WITH the initial '.') and hit enter.  You should be able to run root by typing:\
+root\
+and hitting enter.\
+\
+If you are running Ubuntu:\
+\
+ROOT is no longer in the aptitude repository, so you have to build from source:\
+\
+Download source from: ftp://root.cern.ch/root/root_v5.34.18.source.tar.gz\
+Untar the file: Right click on the downloaded file in the file browser and click 'Extract Here'\
+\
+Open a terminal and type:\
+\
+sudo apt-get install git dpkg-dev make g++ gcc binutils libx11-dev\
+<ENTER>\
+sudo apt-get install libxpm-dev libxft-dev libxext-dev python-dev\
+ <ENTER>\
+\
+each of these commands will take a while to run, so be patient.  You will be prompted for your password after the first (and possibly the second).\
+now go into the directory you created by untarring the file: \
+cd ~/Downloads/root\
+(or whichever directory you untarred to, but this should be the default).\
+Type:\
+./configure --enable-roofit linuxx8664gcc\
+make -j 4\
+This will take a while (make sure you are plugged into power).  Once it is done, do\
+. bin/thisroot.sh\
+then you can run with:\
+root\
+\
+Cheers,\
+Alex}
