@@ -74,7 +74,7 @@ public class Empleado
         apellido = "Matallana";
         genero = 2;
         fechaNacimiento = new Fecha( 16, 6, 1957 );
-        fechaIngreso = new Fecha( 5, 4, 1986 );
+        fechaIngreso = new Fecha( 5, 4, 2020 );
         imagen = "empleado1.png";
         salario = 1500000;
     }
@@ -243,7 +243,16 @@ public class Empleado
     	
     	int anhosTrabajados = calcularAntiguedad();
     	double ganaAlDia = darSalario()/30;
-    	double indemnizacion = darSalario() + (anhosTrabajados - 1) * 20 * ganaAlDia;	
+    	double indemnizacion = 0;
+    	if(anhosTrabajados >0)
+    	{
+    		 indemnizacion= darSalario() + (anhosTrabajados - 1) * 20 * ganaAlDia;	
+    	}
+    	
+    	else
+    	{
+    		indemnizacion = darSalario() / 2;
+    	}
     	String respuesta = String.format("%.2f",indemnizacion);
         return "La indenmnizacion seria: $" + respuesta;
         
@@ -256,36 +265,36 @@ public class Empleado
     public String metodo2( )
     // Es jubilable 
    {
-    	int jubilable = 0;
+    	boolean jubilable = false;
+    	// and --> &&
+    	// or --> ||
+    	// not --> !
+    	
+    	
     	if (genero ==1) //1 - masculino, 2 - femenino
     	{
-    		if(calcularEdad()>=62)
+    		if(calcularEdad()>=62 && calcularAntiguedad()*52 >= 1300)
     		{
-    			if (calcularAntiguedad()*52 >=1300)
-    			{
-    				jubilable = 1;
-    			}
+    			jubilable = true;
     		}
+    		
     	}
     	
     	else
     	{
-    		if (calcularEdad()>=57)
+    		if (calcularEdad()>=57 && calcularAntiguedad()*52 >= 1300)
     		{
-    			if (calcularAntiguedad()*52 >= 1300)
-    			{
-    				jubilable =1;
-    			}
+    			jubilable = true;
     		}
     	}
 
-    	if (jubilable == 0)
+    	if (jubilable)
     	{
-    		return nombre + " No es jubilable!!";
+    		return nombre + " SIIII es jubilable!!";
     	}
     	else
     	{
-    		return nombre + " SIII es jubilable!!";
+    		return nombre + " NO es jubilable!!";
     	}
     }
 
