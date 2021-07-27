@@ -1,0 +1,80 @@
+CONSULTA 0
+------------------------------------------------------------------------------------
+
+SELECT DISTINCT [Career]
+FROM Client
+ORDER BY Career ASC
+LIMIT 100;
+
+----------------------------------------------------------------------------------
+CONSULTA 1
+---------------------------------------------------------------------------------
+SELECT  Career, COUNT(Career) as [Cantidad Clientes]
+FROM Client
+GROUP BY Career
+ORDER BY COUNT(Career) DESC, Career 
+LIMIT 100;
+
+----------------------------------------------------------------------------------
+CONSULTA 2
+-------------------------------------------------------------------------------
+SELECT Card.Card
+FROM Card
+LEFT JOIN ClientCard 
+ON Card.id = ClientCard.idCard
+WHERE ClientCard.idCard IS NULL
+GROUP BY Card.Card
+ORDER BY Card.Card 
+LIMIT 100;
+
+----------------------------------------------------------------------------------
+CONSULTA 3
+-------------------------------------------------------------------------------
+SELECT AccountStatus.[Account Status], COUNT(AccountStatus.[Account Status]) AS [Cantidad Clientes]
+FROM  AccountStatus
+INNER JOIN Client
+ON AccountStatus.id = Client.idAccountStatus
+GROUP BY AccountStatus.[Account Status]
+ORDER BY AccountStatus.[Account Status]
+LIMIT 100;
+
+----------------------------------------------------------------------------------
+CONSULTA 4
+---------------------------------------------------------------------------------
+SELECT (Client.[First Name] || ' ' || Client.[Last Name]) AS [Nombre y Apellido]
+FROM Client
+INNER JOIN ClientCard
+ON Client.id = ClientCard.idClient
+WHERE  SUBSTR(ClientCard.idCard,3,2) = 'CC'
+GROUP BY Client.[First Name] || '  ' || Client.[Last Name]
+HAVING COUNT (Client.[First Name] || '  ' || Client.[Last Name]) = 1
+ORDER BY (Client.[First Name] || '  ' || Client.[Last Name])
+LIMIT 100;
+
+
+----------------------------------------------------------------------------------
+CONSULTA 5
+---------------------------------------------------------------------------------
+SELECT Hometown.Hometown, ROUND(AVG(Client.Age),2) AS [Promedio Edad]
+FROM Hometown
+INNER JOIN Client 
+On Hometown.idHometown = Client.idHometown
+GROUP BY Hometown.Hometown
+HAVING AVG (Client.Age) > 40
+ORDER BY ROUND(AVG(Client.Age),2) DESC, Hometown.Hometown ASC
+LIMIT 100;
+
+----------------------------------------------------------------------------------
+CONSULTA 6
+---------------------------------------------------------------------------------
+SELECT SUBSTR(Client.mail, 1, INSTR(Client.mail, '@') - 1) 
+		AS Direccion, 
+		UPPER(SUBSTR(Client.mail,(INSTR(Client.mail,'@')+1),
+		(INSTR(Client.mail,'.')-INSTR(Client.mail,'@')-1)))
+		AS Dominio, 
+		Hometown.Hometown
+FROM Client
+INNER JOIN Hometown
+ON Client.idHometown = Hometown.idHometown
+ORDER BY SUBSTR(Client.mail, 1, INSTR(Client.mail,'@')-1) ASC
+LIMIT 100;
